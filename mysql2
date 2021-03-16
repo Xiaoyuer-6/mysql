@@ -1,1 +1,452 @@
+Microsoft Windows [版本 10.0.18363.1379]
+(c) 2019 Microsoft Corporation。保留所有权利。
 
+C:\Users\dell>mysql -u root -p1111;
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Users\dell>mysql -u root -p1111;
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Users\dell>mysql -u root -p1111
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 5.7.17-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| testjava17_18      |
++--------------------+
+5 rows in set (0.02 sec)
+
+mysql> use testjava17_18;
+Database changed
+mysql> show tables;
++-------------------------+
+| Tables_in_testjava17_18 |
++-------------------------+
+| books                   |
+| exam_result             |
+| goods                   |
+| stu_test                |
+| student                 |
++-------------------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from  exam_result;
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    1 | 唐三藏 |    67.0 | 98.0 |    56.0 |
+|    2 | 孙悟空 |    87.5 | 78.0 |    77.0 |
+|    3 | 猪悟能 |    88.0 | 98.0 |    90.0 |
+|    4 | 曹孟德 |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德 |    55.5 | 85.0 |    45.0 |
+|    6 | 孙权   |    70.0 | 73.0 |    78.5 |
+|    7 | 宋公明 |    75.0 | 65.0 |    30.0 |
++------+--------+---------+------+---------+
+7 rows in set (0.03 sec)
+
+mysql>  select math from  exam_result;
++------+
+| math |
++------+
+| 98.0 |
+| 78.0 |
+| 98.0 |
+| 84.0 |
+| 85.0 |
+| 73.0 |
+| 65.0 |
++------+
+7 rows in set (0.00 sec)
+
+mysql> select distinct math from exam_result;
++------+
+| math |
++------+
+| 98.0 |
+| 78.0 |
+| 84.0 |
+| 85.0 |
+| 73.0 |
+| 65.0 |
++------+
+6 rows in set (0.01 sec)
+
+mysql> select * from exam_result order by math;
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    7 | 宋公明 |    75.0 | 65.0 |    30.0 |
+|    6 | 孙权   |    70.0 | 73.0 |    78.5 |
+|    2 | 孙悟空 |    87.5 | 78.0 |    77.0 |
+|    4 | 曹孟德 |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德 |    55.5 | 85.0 |    45.0 |
+|    1 | 唐三藏 |    67.0 | 98.0 |    56.0 |
+|    3 | 猪悟能 |    88.0 | 98.0 |    90.0 |
++------+--------+---------+------+---------+
+7 rows in set (0.01 sec)
+
+mysql> select * from exam_result order by math asc;
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    7 | 宋公明 |    75.0 | 65.0 |    30.0 |
+|    6 | 孙权   |    70.0 | 73.0 |    78.5 |
+|    2 | 孙悟空 |    87.5 | 78.0 |    77.0 |
+|    4 | 曹孟德 |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德 |    55.5 | 85.0 |    45.0 |
+|    1 | 唐三藏 |    67.0 | 98.0 |    56.0 |
+|    3 | 猪悟能 |    88.0 | 98.0 |    90.0 |
++------+--------+---------+------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from exam_result order by math desc;
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    1 | 唐三藏 |    67.0 | 98.0 |    56.0 |
+|    3 | 猪悟能 |    88.0 | 98.0 |    90.0 |
+|    5 | 刘玄德 |    55.5 | 85.0 |    45.0 |
+|    4 | 曹孟德 |    82.0 | 84.0 |    67.0 |
+|    2 | 孙悟空 |    87.5 | 78.0 |    77.0 |
+|    6 | 孙权   |    70.0 | 73.0 |    78.5 |
+|    7 | 宋公明 |    75.0 | 65.0 |    30.0 |
++------+--------+---------+------+---------+
+7 rows in set (0.00 sec)
+
+mysql> insert into exam_result values(8,'唐三 藏',67,NULL,80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from exam_result;
++------+---------+---------+------+---------+
+| id   | name    | chinese | math | english |
++------+---------+---------+------+---------+
+|    1 | 唐三藏  |    67.0 | 98.0 |    56.0 |
+|    2 | 孙悟空  |    87.5 | 78.0 |    77.0 |
+|    3 | 猪悟能  |    88.0 | 98.0 |    90.0 |
+|    4 | 曹孟德  |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德  |    55.5 | 85.0 |    45.0 |
+|    6 | 孙权    |    70.0 | 73.0 |    78.5 |
+|    7 | 宋公明  |    75.0 | 65.0 |    30.0 |
+|    8 | 唐三 藏 |    67.0 | NULL |    80.0 |
++------+---------+---------+------+---------+
+8 rows in set (0.00 sec)
+
+mysql> insert into exam_result values(9,'唐三藏',67,-1，80);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into exam_result values(8,'唐三 藏',67,-1,80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from exam_result;
++------+---------+---------+------+---------+
+| id   | name    | chinese | math | english |
++------+---------+---------+------+---------+
+|    1 | 唐三藏  |    67.0 | 98.0 |    56.0 |
+|    2 | 孙悟空  |    87.5 | 78.0 |    77.0 |
+|    3 | 猪悟能  |    88.0 | 98.0 |    90.0 |
+|    4 | 曹孟德  |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德  |    55.5 | 85.0 |    45.0 |
+|    6 | 孙权    |    70.0 | 73.0 |    78.5 |
+|    7 | 宋公明  |    75.0 | 65.0 |    30.0 |
+|    8 | 唐三 藏 |    67.0 | NULL |    80.0 |
+|    8 | 唐三 藏 |    67.0 | -1.0 |    80.0 |
++------+---------+---------+------+---------+
+9 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> SELECT name, chinese + english + math total FROM exam_result
+    -> ORDER BY total DESC;
++---------+-------+
+| name    | total |
++---------+-------+
+| 猪悟能  | 276.0 |
+| 孙悟空  | 242.5 |
+| 曹孟德  | 233.0 |
+| 孙权    | 221.5 |
+| 唐三藏  | 221.0 |
+| 刘玄德  | 185.5 |
+| 宋公明  | 170.0 |
+| 唐三 藏 | 146.0 |
+| 唐三 藏 |  NULL |
++---------+-------+
+9 rows in set (0.01 sec)
+
+mysql> SELECT name, math, english, chinese FROM exam_result
+    -> ORDER BY math DESC, english, chinese;
++---------+------+---------+---------+
+| name    | math | english | chinese |
++---------+------+---------+---------+
+| 唐三藏  | 98.0 |    56.0 |    67.0 |
+| 猪悟能  | 98.0 |    90.0 |    88.0 |
+| 刘玄德  | 85.0 |    45.0 |    55.5 |
+| 曹孟德  | 84.0 |    67.0 |    82.0 |
+| 孙悟空  | 78.0 |    77.0 |    87.5 |
+| 孙权    | 73.0 |    78.5 |    70.0 |
+| 宋公明  | 65.0 |    30.0 |    75.0 |
+| 唐三 藏 | -1.0 |    80.0 |    67.0 |
+| 唐三 藏 | NULL |    80.0 |    67.0 |
++---------+------+---------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math > 80;
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
+|    4 | 曹孟德 | 84.0 |
+|    5 | 刘玄德 | 85.0 |
++------+--------+------+
+4 rows in set (0.01 sec)
+
+mysql> select id,name,math from exam_result where math = 98;
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
++------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math <=> NULL;
++------+---------+------+
+| id   | name    | math |
++------+---------+------+
+|    8 | 唐三 藏 | NULL |
++------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math != 98;
++------+---------+------+
+| id   | name    | math |
++------+---------+------+
+|    2 | 孙悟空  | 78.0 |
+|    4 | 曹孟德  | 84.0 |
+|    5 | 刘玄德  | 85.0 |
+|    6 | 孙权    | 73.0 |
+|    7 | 宋公明  | 65.0 |
+|    8 | 唐三 藏 | -1.0 |
++------+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math between 84 and 98;
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
+|    4 | 曹孟德 | 84.0 |
+|    5 | 刘玄德 | 85.0 |
++------+--------+------+
+4 rows in set (0.01 sec)
+
+mysql> select id,name,math from exam_result where math >= 80 and math<=98;
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
+|    4 | 曹孟德 | 84.0 |
+|    5 | 刘玄德 | 85.0 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math in(98,73,85);
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
+|    5 | 刘玄德 | 85.0 |
+|    6 | 孙权   | 73.0 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math =98 or math = 73 or math=85;
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
+|    5 | 刘玄德 | 85.0 |
+|    6 | 孙权   | 73.0 |
++------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> select id,name,math from exam_result where math is NULL;
++------+---------+------+
+| id   | name    | math |
++------+---------+------+
+|    8 | 唐三 藏 | NULL |
++------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where math is NOT NULL;
++------+---------+------+
+| id   | name    | math |
++------+---------+------+
+|    1 | 唐三藏  | 98.0 |
+|    2 | 孙悟空  | 78.0 |
+|    3 | 猪悟能  | 98.0 |
+|    4 | 曹孟德  | 84.0 |
+|    5 | 刘玄德  | 85.0 |
+|    6 | 孙权    | 73.0 |
+|    7 | 宋公明  | 65.0 |
+|    8 | 唐三 藏 | -1.0 |
++------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> insert into exam_result values(10,'张三丰',67,11,80);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from exam_result;
++------+---------+---------+------+---------+
+| id   | name    | chinese | math | english |
++------+---------+---------+------+---------+
+|    1 | 唐三藏  |    67.0 | 98.0 |    56.0 |
+|    2 | 孙悟空  |    87.5 | 78.0 |    77.0 |
+|    3 | 猪悟能  |    88.0 | 98.0 |    90.0 |
+|    4 | 曹孟德  |    82.0 | 84.0 |    67.0 |
+|    5 | 刘玄德  |    55.5 | 85.0 |    45.0 |
+|    6 | 孙权    |    70.0 | 73.0 |    78.5 |
+|    7 | 宋公明  |    75.0 | 65.0 |    30.0 |
+|    8 | 唐三 藏 |    67.0 | NULL |    80.0 |
+|    8 | 唐三 藏 |    67.0 | -1.0 |    80.0 |
+|   10 | 张三丰  |    67.0 | 11.0 |    80.0 |
++------+---------+---------+------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from exam_result where name like '% 三%';
+Empty set (0.00 sec)
+
+mysql> select * from exam_result where name like '%三%';
++------+---------+---------+------+---------+
+| id   | name    | chinese | math | english |
++------+---------+---------+------+---------+
+|    1 | 唐三藏  |    67.0 | 98.0 |    56.0 |
+|    8 | 唐三 藏 |    67.0 | NULL |    80.0 |
+|    8 | 唐三 藏 |    67.0 | -1.0 |    80.0 |
+|   10 | 张三丰  |    67.0 | 11.0 |    80.0 |
++------+---------+---------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> mysql> select * from exam_result where name like '唐%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from exam_result where name like '唐%'' at line 1
+mysql> select * from exam_result where name like '唐%';
++------+---------+---------+------+---------+
+| id   | name    | chinese | math | english |
++------+---------+---------+------+---------+
+|    1 | 唐三藏  |    67.0 | 98.0 |    56.0 |
+|    8 | 唐三 藏 |    67.0 | NULL |    80.0 |
+|    8 | 唐三 藏 |    67.0 | -1.0 |    80.0 |
++------+---------+---------+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from exam_result where name like '孙 _';
+Empty set (0.00 sec)
+
+mysql> select * from exam_result where name like '孙_';
++------+------+---------+------+---------+
+| id   | name | chinese | math | english |
++------+------+---------+------+---------+
+|    6 | 孙权 |    70.0 | 73.0 |    78.5 |
++------+------+---------+------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from exam_result where name like '孙__';
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    2 | 孙悟空 |    87.5 | 78.0 |    77.0 |
++------+--------+---------+------+---------+
+1 row in set (0.00 sec)
+
+mysql> select id,name,exam_result where english<60;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where english<60' at line 1
+mysql> select id,name fromexam_result where english<60;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where english<60' at line 1
+mysql> select * from exam_result where english<60;
++------+--------+---------+------+---------+
+| id   | name   | chinese | math | english |
++------+--------+---------+------+---------+
+|    1 | 唐三藏 |    67.0 | 98.0 |    56.0 |
+|    5 | 刘玄德 |    55.5 | 85.0 |    45.0 |
+|    7 | 宋公明 |    75.0 | 65.0 |    30.0 |
++------+--------+---------+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select id,name,chinese,english from exam_result where chinese<english;
++------+---------+---------+---------+
+| id   | name    | chinese | english |
++------+---------+---------+---------+
+|    3 | 猪悟能  |    88.0 |    90.0 |
+|    6 | 孙权    |    70.0 |    78.5 |
+|    8 | 唐三 藏 |    67.0 |    80.0 |
+|    8 | 唐三 藏 |    67.0 |    80.0 |
+|   10 | 张三丰  |    67.0 |    80.0 |
++------+---------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select id,name,chinese,math,english 总分 from  exam_result where chinese+math+english<200;
++------+---------+---------+------+------+
+| id   | name    | chinese | math | 总分 |
++------+---------+---------+------+------+
+|    5 | 刘玄德  |    55.5 | 85.0 | 45.0 |
+|    7 | 宋公明  |    75.0 | 65.0 | 30.0 |
+|    8 | 唐三 藏 |    67.0 | -1.0 | 80.0 |
+|   10 | 张三丰  |    67.0 | 11.0 | 80.0 |
++------+---------+---------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> select id,name,chinese,english from  exam_result where chinese>80 and english>80;
++------+--------+---------+---------+
+| id   | name   | chinese | english |
++------+--------+---------+---------+
+|    3 | 猪悟能 |    88.0 |    90.0 |
++------+--------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql>  select id,name,chinese from exam_result where chinese between 80 and 90;
++------+--------+---------+
+| id   | name   | chinese |
++------+--------+---------+
+|    2 | 孙悟空 |    87.5 |
+|    3 | 猪悟能 |    88.0 |
+|    4 | 曹孟德 |    82.0 |
++------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select id,name,math from exam_result where (;)
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    -> select id,name,math from exam_result where math in (58,59,98,99);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+select id,name,math from exam_result where math in (58,59,98,99)' at line 1
+mysql> select id,name,math from exam_result where math in (58,59,98,99);
++------+--------+------+
+| id   | name   | math |
++------+--------+------+
+|    1 | 唐三藏 | 98.0 |
+|    3 | 猪悟能 | 98.0 |
++------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql>
